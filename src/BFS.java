@@ -1,45 +1,57 @@
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.*;
 
 //klasa reprezentujaca BFS na drzwie
-public class BFS {
+// Java program to print BFS traversal from a given source vertex.
+// BFS(int s) traverses vertices reachable from s.
 
-    private int number;       /* total number number of nodes in the graph */
-    private LinkedList<Integer> adj[];      /* adjacency list */
-    private Queue<Integer> que;           /* maintaining a queue */
+// This class represents a directed graph using adjacency list
+// representation
+class BFSGraph {
+    private int V;   // No. of vertices
+    private LinkedList<Integer> adj[]; //Adjacency Lists
 
-
-    public BFS(int v)
-    {
-        number = v;
-        adj = new LinkedList[number];
-        for (int i=0; i<v; i++)
-        {
-            adj[i] = new LinkedList<>();
-        }
-        que = new LinkedList<Integer>();
+    // Constructor
+    BFSGraph(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i < v; ++i)
+            adj[i] = new LinkedList();
     }
-    public void insertEdge(int v,int w)
-    {
-        adj[v].add(w);      /* adding an edge to the adjacency list (edges are bidirectional in this example) */
+
+    // Function to add an edge into the graph
+    void addEdge(int v, int w) {
+        adj[v].add(w);
     }
-    public void BFS(int n)
-    {
-        boolean nodes[] = new boolean[number];       /* initialize boolean array for holding the data */
-        int a = 0;
-        nodes[n]=true;
-        que.add(n);       /* root node is added to the top of the queue */
-        while (que.size() != 0)
-        {
-            n = que.poll();        /* remove the top element of the queue */
-            System.out.print(n+" ");    /* print the top element of the queue */
-            for (int i = 0; i < adj[n].size(); i++)  /* iterate through the linked list and push all neighbors into queue */
-            {
-                a = adj[n].get(i);
-                if (!nodes[a])      /* only insert nodes into queue if they have not been explored already */
-                {
-                    nodes[a] = true;
-                    que.add(a);
+
+    // prints BFS traversal from a given source s
+    void BFS(int s) {
+        // Mark all the vertices as not visited(By default
+        // set as false)
+        boolean visited[] = new boolean[V];
+
+        // Create a queue for BFS
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+
+        // Mark the current node as visited and enqueue it
+        visited[s] = true;
+        queue.add(s);
+
+        while (queue.size() != 0) {
+            // Dequeue a vertex from queue and print it
+            s = queue.poll();
+            System.out.print(s + " ");
+
+            // Get all adjacent vertices of the dequeued vertex s
+            // If a adjacent has not been visited, then mark it
+            // visited and enqueue it
+            Iterator<Integer> i = adj[s].listIterator();
+            while (i.hasNext()) {
+                int n = i.next();
+                if (!visited[n]) {
+                    visited[n] = true;
+                    queue.add(n);
                 }
             }
         }
