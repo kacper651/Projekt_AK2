@@ -2,17 +2,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.*;
 
-//klasa reprezentujaca BFS na drzwie
-// Java program to print BFS traversal from a given source vertex.
-// BFS(int s) traverses vertices reachable from s.
-
-// This class represents a directed graph using adjacency list
-// representation
+//klasa reprezentujaca BFS na drzewie uzywajac reprezentacji listowej
 class BFSGraph {
-    private int V;   // No. of vertices
-    private LinkedList<Integer> adj[]; //Adjacency Lists
+    private int V;   // liczba wierczholkow
+    private LinkedList<Integer> adj[]; //tablica list w celu reprezentacji listy sasiedztwa
 
-    // Constructor
+    // konstruktor
     BFSGraph(int v) {
         V = v;
         adj = new LinkedList[v];
@@ -20,32 +15,30 @@ class BFSGraph {
             adj[i] = new LinkedList();
     }
 
-    // Function to add an edge into the graph
+    // dodawanie krawedzi do drzewa
     void addEdge(int v, int w) {
         adj[v].add(w);
     }
 
-    // prints BFS traversal from a given source s
+    // przechodzi drzewo od wybranego zrodla metoda BFS
     void BFS(int source) {
-        // Mark all the vertices as not visited(By default
-        // set as false)
+        // zaznacz wszystkie wierzcholki jako niezwiedzone
         boolean visited[] = new boolean[V];
 
-        // Create a queue for BFS
+        // zbuduj kolejke dla BFS
         LinkedList<Integer> queue = new LinkedList<Integer>();
 
-        // Mark the current node as visited and enqueue it
+        // oznacz obecny wierzchołek jako zwiedzony
         visited[source] = true;
         queue.add(source);
 
         while (queue.size() != 0) {
-            // Dequeue a vertex from queue and print it
+            // zabieraj po kolei wierzcholki z kolejki
             source = queue.poll();
             //System.out.print(s + " ");
 
-            // Get all adjacent vertices of the dequeued vertex s
-            // If a adjacent has not been visited, then mark it
-            // visited and enqueue it
+            // znajdz wszystkie wierzcholki sasiadujace z wierzcholkiem zabranym
+            // jesli sasiad nie był zwiedzony, zaznacz go i ustaw w kolejce
             Iterator<Integer> i = adj[source].listIterator();
             while (i.hasNext()) {
                 int n = i.next();
