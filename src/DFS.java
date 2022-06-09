@@ -38,7 +38,7 @@ import java.util.LinkedList;
         {
             // Mark the current node as visited and print it
             visited[v] = true;
-            System.out.print(v + " ");
+            //System.out.print(v + " ");
 
             // Recur for all the vertices adjacent to this
             // vertex

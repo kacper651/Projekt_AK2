@@ -26,7 +26,7 @@ class BFSGraph {
     }
 
     // prints BFS traversal from a given source s
-    void BFS(int s) {
+    void BFS(int source) {
         // Mark all the vertices as not visited(By default
         // set as false)
         boolean visited[] = new boolean[V];
@@ -35,18 +35,18 @@ class BFSGraph {
         LinkedList<Integer> queue = new LinkedList<Integer>();
 
         // Mark the current node as visited and enqueue it
-        visited[s] = true;
-        queue.add(s);
+        visited[source] = true;
+        queue.add(source);
 
         while (queue.size() != 0) {
             // Dequeue a vertex from queue and print it
-            s = queue.poll();
-            System.out.print(s + " ");
+            source = queue.poll();
+            //System.out.print(s + " ");
 
             // Get all adjacent vertices of the dequeued vertex s
             // If a adjacent has not been visited, then mark it
             // visited and enqueue it
-            Iterator<Integer> i = adj[s].listIterator();
+            Iterator<Integer> i = adj[source].listIterator();
             while (i.hasNext()) {
                 int n = i.next();
                 if (!visited[n]) {
